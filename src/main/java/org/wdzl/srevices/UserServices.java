@@ -14,4 +14,6 @@ public interface UserServices {
      User queryUserNameIsExit(String username);
      //保存
      User insert(User user);
+     //修改用户
+     User updateUserinfo(User user);
 }

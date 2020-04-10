@@ -52,4 +52,13 @@ public class UserController {
         BeanUtils.copyProperties(userResult,userVo);
         return IWdzlJSONResult.ok(userVo);
     }
+
+    @RequestMapping("/setNickname")
+    @ResponseBody
+    //修改昵称方法
+    public IWdzlJSONResult setNickName(User user){
+        User userResult=userServices.updateUserinfo(user);
+
+        return IWdzlJSONResult.ok(userResult);
+    }
 }
