@@ -16,7 +16,7 @@ import org.springframework.jmx.support.RegistrationPolicy;
 /**
  * 导入FastDFS-Client组件
  *
- * @author tobato
+ * @author 王文
  *
  */
 @Configuration
