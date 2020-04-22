@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -63,7 +64,7 @@ public class UserController {
     @RequestMapping("/uploadFaceBase64")
     @ResponseBody
     //用户头像上传访问
-    public IWdzlJSONResult registerOrlogin(UserBO userBO) throws Exception {
+    public IWdzlJSONResult registerOrlogin(@RequestBody  UserBO userBO) throws Exception {
         //获取前端传过来的Base64的字符串，然后转化为文件对象在进行上传
         String base64Data=userBO.getFaceData();
         String userFacePath="D:\\"+userBO.getUserId()+"userFaceBase64.png";
