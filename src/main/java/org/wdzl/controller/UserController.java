@@ -50,7 +50,7 @@ public class UserController {
            }
         }else{//注册
 
-         user.setNickname("王文");
+         user.setNickname("大朋友");
          user.setQrcode("");
          user.setPassword(MD5Utils.getPwd(user.getPassword()));
          user.setFaceImage("");
