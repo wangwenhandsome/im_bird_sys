@@ -74,7 +74,7 @@ public class UserController {
         //获取fastDFS上传图片的路径
         String url= fastDFSClient.uploadBase64(multipartFile);
         System.out.println(url);
-        String thump="_150×150.";
+        String thump="_150x150.";
         String[] arr = url.split("\\.");
         String thumpImgUrl=arr[0]+thump+arr[1];
 
