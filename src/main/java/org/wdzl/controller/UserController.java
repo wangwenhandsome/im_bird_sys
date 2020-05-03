@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.wdzl.bo.UserBO;
+import org.wdzl.enums.SearchFriendsStatusEnum;
 import org.wdzl.pojo.User;
 import org.wdzl.srevices.UserServices;
 import org.wdzl.utils.FastDFSClient;
@@ -102,12 +103,20 @@ public class UserController {
     public IWdzlJSONResult searchFriend(String myUserId,String friendUserName){
         /**
          * 前置条件：
-         *   1.搜索的用户如果不存在，则返回无此用户
-         *   2.如果是自己，返回不能添加自己
-         *   3.搜索的用户已经是好友，返回该用户已经是你好友
+         * 1.搜索的用户如果不存在，则返回【无此用户】
+         * 2.搜索的账号如果是你自己，则返回【不能添加自己】
+         * 3.搜索的朋友已经是你好友，返回【该用户已经是你的好友】
          */
-
-        return IWdzlJSONResult.ok();
+        Integer status = userServices.preconditionSearchFriends(myUserId,friendUserName);
+        if(status== SearchFriendsStatusEnum.SUCCESS.status){
+            User user = userServices.queryUserNameIsExit(friendUserName);
+            UserVo userVo = new UserVo();
+            BeanUtils.copyProperties(user,userVo);
+            return IWdzlJSONResult.ok(userVo);
+        }else{
+            String msg = SearchFriendsStatusEnum.getMsgByKey(status);
+            return IWdzlJSONResult.errorMsg(msg);
+        }
     }
 
 }

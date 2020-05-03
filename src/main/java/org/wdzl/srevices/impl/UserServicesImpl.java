@@ -4,7 +4,11 @@ import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.wdzl.enums.SearchFriendsStatusEnum;
+import org.wdzl.mapper.FriendsRequestMapper;
+import org.wdzl.mapper.MyFriendsMapper;
 import org.wdzl.mapper.UserMapper;
+import org.wdzl.pojo.MyFriends;
 import org.wdzl.pojo.User;
 import org.wdzl.srevices.UserServices;
 import org.wdzl.utils.FastDFSClient;
@@ -24,6 +28,12 @@ public class UserServicesImpl implements UserServices {
     //注入Mapper
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    MyFriendsMapper myFriendsMapper;
+
+    @Autowired
+    FriendsRequestMapper friendsRequestMapper;
 
     @Autowired
     Sid sid;
@@ -73,7 +83,23 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public Integer preconditionSearchFriends(String myUserId, String friendUserName) {
-
-        return null;
+        User user = queryUserNameIsExit(friendUserName);
+        //1.搜索的用户如果不存在，则返回【无此用户】
+        if(user==null){
+            return SearchFriendsStatusEnum.USER_NOT_EXIST.status;
+        }
+        //2.搜索的账号如果是你自己，则返回【不能添加自己】
+        if(myUserId.equals(user.getId())){
+            return SearchFriendsStatusEnum.NOT_YOURSELF.status;
+        }
+        //3.搜索的朋友已经是你好友，返回【该用户已经是你的好友】
+        MyFriends myfriend = new MyFriends();
+        myfriend.setMyUserId(myUserId);
+        myfriend.setMyFriendUserId(user.getId());
+        MyFriends myF = myFriendsMapper.selectOneByExample(myfriend);
+        if(myF!=null){
+            return SearchFriendsStatusEnum.ALREADY_FRIENDS.status;
+        }
+        return SearchFriendsStatusEnum.SUCCESS.status;
     }
 }
