@@ -16,4 +16,6 @@ public interface UserServices {
      User insert(User user);
      //修改用户
      User updateUserinfo(User user);
+     //搜索好友的前置条件接口
+     Integer preconditionSearchFriends(String myUserId,String friendUserName);
 }

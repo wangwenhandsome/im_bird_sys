@@ -70,4 +70,10 @@ public class UserServicesImpl implements UserServices {
         User result= userMapper.selectByPrimaryKey(user.getId());
         return result;
     }
+
+    @Override
+    public Integer preconditionSearchFriends(String myUserId, String friendUserName) {
+
+        return null;
+    }
 }
