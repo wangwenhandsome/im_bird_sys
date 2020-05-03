@@ -96,4 +96,18 @@ public class UserController {
 
         return IWdzlJSONResult.ok(userResult);
     }
+    //搜索好友的方法
+    @RequestMapping("/searchFriend")
+    @ResponseBody
+    public IWdzlJSONResult searchFriend(String myUserId,String friendUserName){
+        /**
+         * 前置条件：
+         *   1.搜索的用户如果不存在，则返回无此用户
+         *   2.如果是自己，返回不能添加自己
+         *   3.搜索的用户已经是好友，返回该用户已经是你好友
+         */
+
+        return IWdzlJSONResult.ok();
+    }
+
 }
