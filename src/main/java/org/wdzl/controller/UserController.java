@@ -86,14 +86,14 @@ public class UserController {
         user.setId(userBO.getUserId());
         user.setFaceImage(thumpImgUrl);
         user.setFaceImageBig(url);
-        User result = userServices.updateUserinfo(user);
+        User result = userServices.updateUserInfo(user);
         return IWdzlJSONResult.ok(result);
     }
     @RequestMapping("/setNickname")
     @ResponseBody
     //修改昵称方法
     public IWdzlJSONResult setNickName(User user){
-        User userResult=userServices.updateUserinfo(user);
+        User userResult=userServices.updateUserInfo(user);
 
         return IWdzlJSONResult.ok(userResult);
     }
