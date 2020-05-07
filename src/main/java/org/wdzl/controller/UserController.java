@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.wdzl.bo.UserBO;
 import org.wdzl.enums.SearchFriendsStatusEnum;
 import org.wdzl.pojo.User;
-import org.wdzl.srevices.UserServices;
+import org.wdzl.services.UserServices;
 import org.wdzl.utils.FastDFSClient;
 import org.wdzl.utils.FileUtils;
 import org.wdzl.utils.IWdzlJSONResult;

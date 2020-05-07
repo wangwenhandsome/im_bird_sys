@@ -1,4 +1,4 @@
-package org.wdzl.srevices;
+package org.wdzl.services;
 
 import org.wdzl.pojo.User;
 
@@ -15,7 +15,9 @@ public interface UserServices {
      //保存
      User insert(User user);
      //修改用户
-     User updateUserinfo(User user);
+     User updateUserInfo(User user);
      //搜索好友的前置条件接口
      Integer preconditionSearchFriends(String myUserId,String friendUserName);
+     //发送好友请求
+     void  sendFriendRequest(String myUserId,String friendUserName);
 }
