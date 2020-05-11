@@ -1,5 +1,6 @@
 package org.wdzl.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -117,6 +118,22 @@ public class UserController {
             String msg = SearchFriendsStatusEnum.getMsgByKey(status);
             return IWdzlJSONResult.errorMsg(msg);
         }
+    }
+    //搜索好友的方法
+    @RequestMapping("/addFriendRequest")
+    @ResponseBody
+    public IWdzlJSONResult addFriendRequest(String myUserId,String friendUserName){
+        if(StringUtils.isBlank(myUserId)||StringUtils.isBlank(friendUserName)){
+            return IWdzlJSONResult.errorMsg("好友信息为空");
+        }
+        Integer status=userServices.preconditionSearchFriends(myUserId,friendUserName);
+        if (status==SearchFriendsStatusEnum.SUCCESS.status){
+            userServices.sendFriendRequest(myUserId,friendUserName);
+        } else{
+            String msg=SearchFriendsStatusEnum.getMsgByKey(status);
+            return IWdzlJSONResult.errorMsg(msg);
+        }
+        return IWdzlJSONResult.ok();
     }
 
 }
