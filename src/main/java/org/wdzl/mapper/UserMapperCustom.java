@@ -11,5 +11,5 @@ import java.util.List;
  * @Description:
  */
 public interface UserMapperCustom {
-    List<FriendsRequestVo> queryFriendRequestList();
+    List<FriendsRequestVo> queryFriendRequestList(String acceptUserId);
 }
