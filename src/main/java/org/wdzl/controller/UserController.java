@@ -17,7 +17,10 @@ import org.wdzl.utils.FastDFSClient;
 import org.wdzl.utils.FileUtils;
 import org.wdzl.utils.IWdzlJSONResult;
 import org.wdzl.utils.MD5Utils;
+import org.wdzl.vo.FriendsRequestVo;
 import org.wdzl.vo.UserVo;
+
+import java.util.List;
 
 /**
  * @Author: 王文
@@ -135,5 +138,11 @@ public class UserController {
         }
         return IWdzlJSONResult.ok();
     }
-
+    //好友列表的查询
+    @RequestMapping("/queryFriendRequestList")
+    @ResponseBody
+    public IWdzlJSONResult queryFriendRequestList(String UserId){
+        List<FriendsRequestVo> friendsRequestVoList = userServices.queryFriendRequestList(UserId);
+        return IWdzlJSONResult.ok(friendsRequestVoList);
+    }
 }

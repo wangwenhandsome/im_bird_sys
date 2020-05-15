@@ -8,6 +8,7 @@ import org.wdzl.enums.SearchFriendsStatusEnum;
 import org.wdzl.mapper.FriendsRequestMapper;
 import org.wdzl.mapper.MyFriendsMapper;
 import org.wdzl.mapper.UserMapper;
+import org.wdzl.mapper.UserMapperCustom;
 import org.wdzl.pojo.FriendsRequest;
 import org.wdzl.pojo.MyFriends;
 import org.wdzl.pojo.User;
@@ -16,9 +17,11 @@ import org.wdzl.services.UserServices;
 import org.wdzl.utils.FastDFSClient;
 import org.wdzl.utils.FileUtils;
 import org.wdzl.utils.QRCodeUtils;
+import org.wdzl.vo.FriendsRequestVo;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServicesImpl implements UserServices {
@@ -41,6 +44,9 @@ public class UserServicesImpl implements UserServices {
 
     @Autowired
     FastDFSClient fastDFSClient;
+
+    @Autowired
+    UserMapperCustom userMapperCustom;
 
     @Override
     public User getUserById(String id) {
@@ -120,4 +126,8 @@ public class UserServicesImpl implements UserServices {
         }
     }
 
+    @Override
+    public List<FriendsRequestVo> queryFriendRequestList(String acceptUserId) {
+        return userMapperCustom.queryFriendRequestList(acceptUserId);
+    }
 }
