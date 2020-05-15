@@ -37,6 +37,9 @@ public class UserServicesImpl implements UserServices {
     FriendsRequestMapper  friendsRequestMapper;
 
     @Autowired
+    UserMapperCustom userMapperCustom;
+
+    @Autowired
     Sid sid;
 
     @Autowired
@@ -45,8 +48,7 @@ public class UserServicesImpl implements UserServices {
     @Autowired
     FastDFSClient fastDFSClient;
 
-    @Autowired
-    UserMapperCustom userMapperCustom;
+
 
     @Override
     public User getUserById(String id) {

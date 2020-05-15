@@ -138,11 +138,11 @@ public class UserController {
         }
         return IWdzlJSONResult.ok();
     }
-    //好友列表的查询
+    //好友请求列表查询
     @RequestMapping("/queryFriendRequest")
     @ResponseBody
-    public IWdzlJSONResult queryFriendRequest(String UserId){
-        List<FriendsRequestVo> friendsRequestVoList = userServices.queryFriendRequestList(UserId);
-        return IWdzlJSONResult.ok(friendsRequestVoList);
+    public IWdzlJSONResult queryFriendRequest(String userId){
+        List<FriendsRequestVo> friendRequestList = userServices.queryFriendRequestList(userId);
+        return IWdzlJSONResult.ok(friendRequestList);
     }
 }
