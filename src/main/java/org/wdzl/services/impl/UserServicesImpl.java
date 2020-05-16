@@ -141,10 +141,12 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public void passFriendRequest(String sendUserId, String acceptUserId) {
-        //进行保存
-        sendFriendRequest(sendUserId,acceptUserId);
-        sendFriendRequest(acceptUserId,sendUserId);
-        FriendsRequest friendsRequest=new FriendsRequest();
+        //进行双向好友数据保存
+        saveFriends(sendUserId,acceptUserId);
+        saveFriends(acceptUserId,sendUserId);
+
+        //删除好友请求表中的数据
+        FriendsRequest friendsRequest = new FriendsRequest();
         friendsRequest.setSendUserId(sendUserId);
         friendsRequest.setAcceptUserId(acceptUserId);
         deleteFriendRequest(friendsRequest);
