@@ -18,6 +18,7 @@ import org.wdzl.utils.FastDFSClient;
 import org.wdzl.utils.FileUtils;
 import org.wdzl.utils.QRCodeUtils;
 import org.wdzl.vo.FriendsRequestVO;
+import org.wdzl.vo.MyFriendsVO;
 
 import java.io.IOException;
 import java.util.Date;
@@ -131,5 +132,37 @@ public class UserServicesImpl implements UserServices {
     @Override
     public List<FriendsRequestVO> queryFriendRequestList(String acceptUserId) {
         return userMapperCustom.queryFriendRequestList(acceptUserId);
+    }
+
+    @Override
+    public void deleteFriendRequest(FriendsRequest friendsRequest) {
+      friendsRequestMapper.deleteByFriendRequest(friendsRequest);
+    }
+
+    @Override
+    public void passFriendRequest(String sendUserId, String acceptUserId) {
+        //进行保存
+        sendFriendRequest(sendUserId,acceptUserId);
+        sendFriendRequest(acceptUserId,sendUserId);
+        FriendsRequest friendsRequest=new FriendsRequest();
+        friendsRequest.setSendUserId(sendUserId);
+        friendsRequest.setAcceptUserId(acceptUserId);
+        deleteFriendRequest(friendsRequest);
+    }
+
+    //通过好友请求并保存数据到myfriends表
+    private void saveFriends(String sendUserId, String acceptUserId){
+        MyFriends myFriends=new MyFriends();
+        myFriends.setMyUserId(sendUserId);
+        myFriends.setMyFriendUserId(acceptUserId);
+        String recordId=sid.nextShort();
+        myFriends.setId(recordId);
+
+        myFriendsMapper.insert(myFriends);
+    }
+
+    @Override
+    public List<MyFriendsVO> queryMyFriends(String userId) {
+        return userMapperCustom.queryMyFriends(userId);
     }
 }

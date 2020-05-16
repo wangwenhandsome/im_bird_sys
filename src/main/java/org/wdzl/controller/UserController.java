@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.wdzl.bo.UserBO;
+import org.wdzl.enums.OperatorFriendRequestTypeEnum;
 import org.wdzl.enums.SearchFriendsStatusEnum;
+import org.wdzl.pojo.FriendsRequest;
 import org.wdzl.pojo.User;
 import org.wdzl.services.UserServices;
 import org.wdzl.utils.FastDFSClient;
@@ -18,6 +20,7 @@ import org.wdzl.utils.FileUtils;
 import org.wdzl.utils.IWdzlJSONResult;
 import org.wdzl.utils.MD5Utils;
 import org.wdzl.vo.FriendsRequestVO;
+import org.wdzl.vo.MyFriendsVO;
 import org.wdzl.vo.UserVo;
 
 import java.util.List;
@@ -146,5 +149,23 @@ UserController {
     public IWdzlJSONResult queryFriendRequest(String userId){
         List<FriendsRequestVO> friendRequestList = userServices.queryFriendRequestList(userId);
         return IWdzlJSONResult.ok(friendRequestList);
+    }
+    //好友请求处理
+    @RequestMapping("/operFriendRequest")
+    @ResponseBody
+    public IWdzlJSONResult operFriendRequest(String acceptUserId,String sendUserId,int operType){
+        FriendsRequest friendsRequest=new FriendsRequest();
+        friendsRequest.setAcceptUserId(acceptUserId);
+        friendsRequest.setSendUserId(sendUserId);
+        if (operType== OperatorFriendRequestTypeEnum.IGNORE.type){
+            //满足此添加需要对好友请求的数据进行删除操作
+            userServices.deleteFriendRequest(friendsRequest);
+        }else if (operType==OperatorFriendRequestTypeEnum.PASS.type){
+            //满足此条件，需要将好友表中添加一条数据，同时删除好友请求表中的对应的数据
+         userServices.passFriendRequest(sendUserId,acceptUserId);
+        }
+        //查询好友表中的列表数据
+        List<MyFriendsVO> myFriends = userServices.queryMyFriends(acceptUserId);
+        return IWdzlJSONResult.ok(myFriends);
     }
 }
