@@ -17,7 +17,7 @@ import org.wdzl.utils.FastDFSClient;
 import org.wdzl.utils.FileUtils;
 import org.wdzl.utils.IWdzlJSONResult;
 import org.wdzl.utils.MD5Utils;
-import org.wdzl.vo.FriendsRequestVo;
+import org.wdzl.vo.FriendsRequestVO;
 import org.wdzl.vo.UserVo;
 
 import java.util.List;
@@ -31,6 +31,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class
+
 UserController {
     @Autowired
     UserServices userServices;
@@ -143,7 +144,7 @@ UserController {
     @RequestMapping("/queryFriendRequest")
     @ResponseBody
     public IWdzlJSONResult queryFriendRequest(String userId){
-        List<FriendsRequestVo> friendRequestList = userServices.queryFriendRequestList(userId);
+        List<FriendsRequestVO> friendRequestList = userServices.queryFriendRequestList(userId);
         return IWdzlJSONResult.ok(friendRequestList);
     }
 }

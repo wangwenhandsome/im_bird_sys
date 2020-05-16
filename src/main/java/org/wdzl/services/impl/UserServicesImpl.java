@@ -17,7 +17,7 @@ import org.wdzl.services.UserServices;
 import org.wdzl.utils.FastDFSClient;
 import org.wdzl.utils.FileUtils;
 import org.wdzl.utils.QRCodeUtils;
-import org.wdzl.vo.FriendsRequestVo;
+import org.wdzl.vo.FriendsRequestVO;
 
 import java.io.IOException;
 import java.util.Date;
@@ -129,7 +129,7 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public List<FriendsRequestVo> queryFriendRequestList(String acceptUserId) {
+    public List<FriendsRequestVO> queryFriendRequestList(String acceptUserId) {
         return userMapperCustom.queryFriendRequestList(acceptUserId);
     }
 }

@@ -1,6 +1,6 @@
 package org.wdzl.mapper;
 
-import org.wdzl.vo.FriendsRequestVo;
+import org.wdzl.vo.FriendsRequestVO;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ import java.util.List;
  * @Description:
  */
 public interface UserMapperCustom {
-    List<FriendsRequestVo> queryFriendRequestList(String acceptUserId);
+    List<FriendsRequestVO> queryFriendRequestList(String acceptUserId);
 }

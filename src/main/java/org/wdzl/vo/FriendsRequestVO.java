@@ -9,7 +9,7 @@ import java.util.Date;
  * @Description:
  */
 
-public class FriendsRequestVo {
+public class FriendsRequestVO {
 
     private String sendUserId;
     private String sendUsername;

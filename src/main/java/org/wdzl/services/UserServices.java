@@ -1,7 +1,7 @@
 package org.wdzl.services;
 
 import org.wdzl.pojo.User;
-import org.wdzl.vo.FriendsRequestVo;
+import org.wdzl.vo.FriendsRequestVO;
 
 import java.util.List;
 
@@ -24,5 +24,5 @@ public interface UserServices {
      //发送好友请求
      void  sendFriendRequest(String myUserId,String friendUserName);
      //好友请求列表查询
-     List<FriendsRequestVo> queryFriendRequestList(String acceptUserId);
+     List<FriendsRequestVO> queryFriendRequestList(String acceptUserId);
 }
