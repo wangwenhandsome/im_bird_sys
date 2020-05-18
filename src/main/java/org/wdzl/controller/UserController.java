@@ -165,10 +165,8 @@ UserController {
          userServices.passFriendRequest(sendUserId,acceptUserId);
         }
 
-
-
         //查询好友表中的列表数据
-
+        //查询好友表中的列表数据
         List<MyFriendsVO> myFriends = userServices.queryMyFriends(acceptUserId);
         return IWdzlJSONResult.ok(myFriends);
     }
