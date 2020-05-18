@@ -164,7 +164,11 @@ UserController {
             //满足此条件，需要将好友表中添加一条数据，同时删除好友请求表中的对应的数据
          userServices.passFriendRequest(sendUserId,acceptUserId);
         }
+
+
+
         //查询好友表中的列表数据
+
         List<MyFriendsVO> myFriends = userServices.queryMyFriends(acceptUserId);
         return IWdzlJSONResult.ok(myFriends);
     }
