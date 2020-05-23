@@ -166,8 +166,18 @@ UserController {
         }
 
         //查询好友表中的列表数据
-        //查询好友表中的列表数据
         List<MyFriendsVO> myFriends = userServices.queryMyFriends(acceptUserId);
         return IWdzlJSONResult.ok(myFriends);
+    }
+    //查询好友列表
+    @RequestMapping("/myFriends")
+    @ResponseBody
+    public IWdzlJSONResult myFriends(String userId){
+       if (StringUtils.isBlank(userId)){
+           return IWdzlJSONResult.errorMsg("用户id为空");
+       }
+       //数据库查询好友列表
+        List<MyFriendsVO> myFriends = userServices.queryMyFriends(userId);
+       return IWdzlJSONResult.ok(myFriends);
     }
 }
