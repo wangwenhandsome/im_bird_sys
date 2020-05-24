@@ -25,7 +25,7 @@ public class HelloNettyServer {
             ServerBootstrap serverBootstrap=new ServerBootstrap();
             serverBootstrap.group(group1,group2)//设置主从线程组
                     .channel(NioServerSocketChannel.class)//设置nio双向通道
-                    .childHandler(null);//添加子处理器，处理从线程池的任务
+                    .childHandler(new HelloNettyServerInitializer());//添加子处理器，处理从线程池的任务
             //启动服务，并且设置端口号，启动方式为同步
             ChannelFuture channelFuture = serverBootstrap.bind(8888).sync();
             //监听关闭的channel,设置为同步方式
