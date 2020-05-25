@@ -31,6 +31,9 @@ public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
         response.headers().set(HttpHeaderNames.CONTENT_LENGTH,content.readableBytes());
         //吧响应渲染到html客户端页面
         ctx.writeAndFlush(response);
-
+    }
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channel 注册");
     }
 }
