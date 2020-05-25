@@ -61,4 +61,10 @@ public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         System.out.println("用户事件触发");
     }
+
+    @Override
+    public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channel 可写更改");
+    }
+
 }
