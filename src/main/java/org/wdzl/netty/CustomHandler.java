@@ -67,4 +67,19 @@ public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
         System.out.println("channel 可写更改");
     }
 
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("捕获异常");
+    }
+
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("助手类的移除");
+    }
+
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("助手类的添加");
+    }
+
 }
