@@ -56,4 +56,9 @@ public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel 读取完毕");
     }
+
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        System.out.println("用户事件触发");
+    }
 }
