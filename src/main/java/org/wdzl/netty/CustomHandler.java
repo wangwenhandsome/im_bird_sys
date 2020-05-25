@@ -51,4 +51,9 @@ public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel 不活跃");
     }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channel 读取完毕");
+    }
 }
