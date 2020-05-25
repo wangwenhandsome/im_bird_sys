@@ -36,4 +36,9 @@ public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channel 注册");
     }
+
+    @Override
+    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channel 移除");
+    }
 }
