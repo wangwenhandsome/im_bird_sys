@@ -1,6 +1,5 @@
 package org.wdzl.services;
 
-import org.wdzl.netty.ChatMsg;
 import org.wdzl.pojo.FriendsRequest;
 import org.wdzl.pojo.User;
 import org.wdzl.vo.FriendsRequestVO;
