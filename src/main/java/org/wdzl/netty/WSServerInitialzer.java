@@ -8,31 +8,26 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
-/**
- * @Author: 王文
- * @Date: 2020/5/25 23:09
- * @Version: 1.0
- * @Description:
- */
-
 public class WSServerInitialzer extends ChannelInitializer<SocketChannel> {
-
     @Override
     protected void initChannel(SocketChannel channel) throws Exception {
-        //获取管道(pipeline)
-        ChannelPipeline pipeline=channel.pipeline();
-        //webSocket 基与Http协议所需要的编解码器
+        //获取管道（pipeline）
+        ChannelPipeline pipeline = channel.pipeline();
+        //websocket 基于http协议，所需要的http 编解码器
         pipeline.addLast(new HttpServerCodec());
-        //在Http上有一些数据流产生,有大有小，我们对其进行处理，我们需要使用netty对数据流读写提供支持，这个类叫：ChunkedWriteHandler
+        //在http上有一些数据流产生，有大有小，我们对其进行处理，既然如此，我们需要使用netty 对下数据流写 提供支持，这个类叫：ChunkedWriteHandler
         pipeline.addLast(new ChunkedWriteHandler());
-        //对HttpMessage 进行聚合处理
+        //对httpMessage 进行聚合处理，聚合成request或 response
         pipeline.addLast(new HttpObjectAggregator(1024*64));
+
         /**
-         * 本handel 会帮你处理一些复杂问题
+         * 本handler 会帮你处理一些繁重复杂的事情
+         * 会帮你处理握手动作：handshaking（close、ping、pong） ping+pong = 心跳
+         * 对于websocket 来讲，都是以frams 进行传输的，不同的数据类型对应的frams 也不同
          */
         pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
 
-        //自定义handel
+        //自定义的handler
         pipeline.addLast(new ChatHandler());
 
     }

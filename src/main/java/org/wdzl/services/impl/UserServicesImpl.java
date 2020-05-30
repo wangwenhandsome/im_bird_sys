@@ -9,6 +9,7 @@ import org.wdzl.mapper.FriendsRequestMapper;
 import org.wdzl.mapper.MyFriendsMapper;
 import org.wdzl.mapper.UserMapper;
 import org.wdzl.mapper.UserMapperCustom;
+import org.wdzl.netty.ChatMsg;
 import org.wdzl.pojo.FriendsRequest;
 import org.wdzl.pojo.MyFriends;
 import org.wdzl.pojo.User;
@@ -167,4 +168,6 @@ public class UserServicesImpl implements UserServices {
     public List<MyFriendsVO> queryMyFriends(String userId) {
         return userMapperCustom.queryMyFriends(userId);
     }
+
+
 }
