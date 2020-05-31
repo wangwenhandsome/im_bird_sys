@@ -27,9 +27,10 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         //1.获取客户端的发来的消息
         //2.判断消息的类型,根据不同的类型处理不同的业务
         /**
-         * 2.1当websocket第一次open,初始化channel，把用的channel和userid关联
-         * 2.2聊天类型的消息，把聊天记录保存到数据库，同时标记消息的签收状态【未签收】
-         * 2.3签收消息类型，针对具体的消息进行签收，修改数据库中对应的消息的签身状态【已签收】
+         * 2.1 当websocket第一次open,初始化channel，把用的channel和userid关联
+         * 2.2 聊天类型的消息，把聊天记录保存到数据库，同时标记消息的签收状态【未签收】
+         * 2.3 签收消息类型，针对具体的消息进行签收，修改数据库中对应的消息的签身状态【已签收】
+         * 2.4 心跳类型的消息
          */
     }
 
