@@ -1,5 +1,6 @@
 package org.wdzl.services;
 
+import org.wdzl.netty.ChatMsg;
 import org.wdzl.pojo.FriendsRequest;
 import org.wdzl.pojo.User;
 import org.wdzl.vo.FriendsRequestVO;
@@ -33,8 +34,8 @@ public interface UserServices {
      void passFriendRequest(String sendUserId,String acceptUserId);
      //好友列表查询
      List<MyFriendsVO> queryMyFriends(String userId);
-//     //保存用户聊天消息
-//     String saveMsg(ChatMsg chatMsg);
-//
-//     void updateMsgSigned(List<String> msgIdList);
+     //保存用户聊天消息
+     String saveMsg(ChatMsg chatMsg);
+
+     void updateMsgSigned(List<String> msgIdList);
 }

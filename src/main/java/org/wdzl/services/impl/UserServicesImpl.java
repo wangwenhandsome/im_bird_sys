@@ -4,11 +4,10 @@ import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.wdzl.enums.MsgSignFlagEnum;
 import org.wdzl.enums.SearchFriendsStatusEnum;
-import org.wdzl.mapper.FriendsRequestMapper;
-import org.wdzl.mapper.MyFriendsMapper;
-import org.wdzl.mapper.UserMapper;
-import org.wdzl.mapper.UserMapperCustom;
+import org.wdzl.mapper.*;
+import org.wdzl.netty.ChatMsg;
 import org.wdzl.pojo.FriendsRequest;
 import org.wdzl.pojo.MyFriends;
 import org.wdzl.pojo.User;
@@ -39,6 +38,9 @@ public class UserServicesImpl implements UserServices {
 
     @Autowired
     UserMapperCustom userMapperCustom;
+
+    @Autowired
+    ChatMsgMapper chatMsgMapper;
 
     @Autowired
     Sid sid;
@@ -168,5 +170,24 @@ public class UserServicesImpl implements UserServices {
         return userMapperCustom.queryMyFriends(userId);
     }
 
+    @Override
+    public String saveMsg(ChatMsg chatMsg) {
+        org.wdzl.pojo.ChatMsg msgDB = new org.wdzl.pojo.ChatMsg();
+        String msgId = sid.nextShort();
+        msgDB.setId(msgId);
+        msgDB.setAcceptUserId(chatMsg.getReceiverId());
+        msgDB.setSendUserId(chatMsg.getSenderId());
+        msgDB.setCreateTime(new Date());
+        msgDB.setSignFlag(MsgSignFlagEnum.unsign.type);
+        msgDB.setMsg(chatMsg.getMsg());
 
+        chatMsgMapper.insert(msgDB);
+
+        return msgId;
+    }
+
+    @Override
+    public void updateMsgSigned(List<String> msgIdList) {
+        userMapperCustom.batchUpdateMsgSigned(msgIdList);
+    }
 }
