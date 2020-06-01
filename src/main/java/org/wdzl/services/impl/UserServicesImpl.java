@@ -1,13 +1,17 @@
 package org.wdzl.services.impl;
 
+import io.netty.channel.Channel;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.wdzl.enums.MsgActionEnum;
 import org.wdzl.enums.MsgSignFlagEnum;
 import org.wdzl.enums.SearchFriendsStatusEnum;
 import org.wdzl.mapper.*;
 import org.wdzl.netty.ChatMsg;
+import org.wdzl.netty.DataContent;
+import org.wdzl.netty.UserChanelRel;
 import org.wdzl.pojo.FriendsRequest;
 import org.wdzl.pojo.MyFriends;
 import org.wdzl.pojo.User;
@@ -152,6 +156,15 @@ public class UserServicesImpl implements UserServices {
         friendsRequest.setSendUserId(sendUserId);
         friendsRequest.setAcceptUserId(acceptUserId);
         deleteFriendRequest(friendsRequest);
+
+
+
+        //使用websocket主动推送消息到请求发起者，更新他的通讯录列表为最新
+        DataContent dataContent = new DataContent();
+        dataContent.setAction(MsgActionEnum.PULL_FRIEND.type);
+
+        Channel sendChannel = UserChanelRel.get(sendUserId);
+
     }
 
     //通过好友请求并保存数据到myfriends表
