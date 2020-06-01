@@ -164,7 +164,9 @@ public class UserServicesImpl implements UserServices {
         dataContent.setAction(MsgActionEnum.PULL_FRIEND.type);
 
         Channel sendChannel = UserChanelRel.get(sendUserId);
+        if (sendChannel!=null){
 
+        }
     }
 
     //通过好友请求并保存数据到myfriends表
