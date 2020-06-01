@@ -1,6 +1,7 @@
 package org.wdzl.services.impl;
 
 import io.netty.channel.Channel;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import org.wdzl.pojo.User;
 import org.wdzl.services.UserServices;
 import org.wdzl.utils.FastDFSClient;
 import org.wdzl.utils.FileUtils;
+import org.wdzl.utils.JsonUtils;
 import org.wdzl.utils.QRCodeUtils;
 import org.wdzl.vo.FriendsRequestVO;
 import org.wdzl.vo.MyFriendsVO;
@@ -157,15 +159,14 @@ public class UserServicesImpl implements UserServices {
         friendsRequest.setAcceptUserId(acceptUserId);
         deleteFriendRequest(friendsRequest);
 
-
-
-        //使用websocket主动推送消息到请求发起者，更新他的通讯录列表为最新
-        DataContent dataContent = new DataContent();
-        dataContent.setAction(MsgActionEnum.PULL_FRIEND.type);
-
         Channel sendChannel = UserChanelRel.get(sendUserId);
         if (sendChannel!=null){
+            //使用websocket主动推送消息到请求发起者，更新他的通讯录列表为最新
+            DataContent dataContent = new DataContent();
+            dataContent.setAction(MsgActionEnum.PULL_FRIEND.type);
 
+            //消息的推送
+            sendChannel.writeAndFlush(new TextWebSocketFrame(JsonUtils.objectToJson(dataContent)));
         }
     }
 
