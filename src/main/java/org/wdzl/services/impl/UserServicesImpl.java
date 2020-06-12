@@ -206,4 +206,9 @@ public class UserServicesImpl implements UserServices {
     public void updateMsgSigned(List<String> msgIdList) {
         userMapperCustom.batchUpdateMsgSigned(msgIdList);
     }
+
+    @Override
+    public List<org.wdzl.pojo.ChatMsg> getUnReadMsgList(String acceptUserId) {
+        return null;
+    }
 }
