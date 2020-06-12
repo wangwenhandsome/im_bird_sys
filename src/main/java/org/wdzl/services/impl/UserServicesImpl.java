@@ -209,7 +209,7 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public List<org.wdzl.pojo.ChatMsg> getUnReadMsgList(String acceptUserId) {
-
-        return null;
+        List<org.wdzl.pojo.ChatMsg> result = chatMsgMapper.getUnReadMsgListByAcceptUid(acceptUserId);
+        return result;
     }
 }
