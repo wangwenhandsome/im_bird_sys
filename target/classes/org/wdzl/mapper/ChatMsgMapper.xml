@@ -18,6 +18,13 @@
     from chat_msg
     where id = #{id,jdbcType=VARCHAR}
   </select>
+<!--  根据接受id查询未签收消息列表-->
+  <select id="getUnReadMsgListByAcceptUid" parameterType="java.lang.String" resultType="org.wdzl.pojo.ChatMsg">
+    select
+    <include refid="Base_Column_List" />
+    from chat_msg
+    where accept_user_id = #{acceptUserId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from chat_msg
     where id = #{id,jdbcType=VARCHAR}
