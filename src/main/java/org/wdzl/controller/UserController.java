@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.wdzl.bo.UserBO;
 import org.wdzl.enums.OperatorFriendRequestTypeEnum;
 import org.wdzl.enums.SearchFriendsStatusEnum;
+import org.wdzl.pojo.ChatMsg;
 import org.wdzl.pojo.FriendsRequest;
 import org.wdzl.pojo.User;
 import org.wdzl.services.UserServices;
@@ -192,6 +193,7 @@ UserController {
            return IWdzlJSONResult.errorMsg("接受者ID不能为空");
        }
        //根据接受id查询未签收的消息列表
-        return null;
+        List<ChatMsg> unReadMsgList = userServices.getUnReadMsgList(acceptUserId);
+       return IWdzlJSONResult.ok(unReadMsgList);
     }
 }
