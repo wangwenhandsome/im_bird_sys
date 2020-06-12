@@ -38,4 +38,7 @@ public interface UserServices {
      String saveMsg(ChatMsg chatMsg);
 
      void updateMsgSigned(List<String> msgIdList);
+
+     //获取未接受的消息列表
+     List<org.wdzl.pojo.ChatMsg> getUnReadMsgList(String acceptUserId);
 }
