@@ -180,4 +180,18 @@ UserController {
         List<MyFriendsVO> myFriends = userServices.queryMyFriends(userId);
        return IWdzlJSONResult.ok(myFriends);
     }
+
+    /**
+     * 用户手机端口获取未签收的消息内容
+     * @param acceptUserId
+     * @return
+     */
+    @RequestMapping("/getUnReadMsgList")
+    public IWdzlJSONResult getUnReadMsgList(String acceptUserId){
+       if(StringUtils.isBlank(acceptUserId)){
+           return IWdzlJSONResult.errorMsg("接受者ID不能为空");
+       }
+       //根据接受id查询未签收的消息列表
+        return null;
+    }
 }
