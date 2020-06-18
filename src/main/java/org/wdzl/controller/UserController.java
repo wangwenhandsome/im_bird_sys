@@ -188,6 +188,7 @@ UserController {
      * @return
      */
     @RequestMapping("/getUnReadMsgList")
+    @ResponseBody
     public IWdzlJSONResult getUnReadMsgList(String acceptUserId){
        if(StringUtils.isBlank(acceptUserId)){
            return IWdzlJSONResult.errorMsg("接受者ID不能为空");
