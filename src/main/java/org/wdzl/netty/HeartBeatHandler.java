@@ -7,5 +7,12 @@ package org.wdzl.netty;
  * @Description:
  */
 
-public class HeartBeatHandler {
+import io.netty.channel.ChannelInboundHandlerAdapter;
+
+/**
+ * 用于检测channel 的心跳handler
+ * 继承ChannelInboundHandlerAdapter，目的是不需要实现ChannelRead0 这个方法
+ */
+public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
+
 }
