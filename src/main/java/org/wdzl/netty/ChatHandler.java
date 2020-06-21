@@ -103,6 +103,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
 
         } else if(action == MsgActionEnum.KEEPALIVE.type){
             //2.4 心跳类型的消息
+            System.out.println("收到来自cahnnel 为 ["+channel+"] 的心跳包");
         }
     }
 
