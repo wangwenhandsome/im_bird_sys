@@ -197,10 +197,4 @@ UserController {
         List<ChatMsg> unReadMsgList = userServices.getUnReadMsgList(acceptUserId);
        return IWdzlJSONResult.ok(unReadMsgList);
     }
-
-    //hb
-
-
-    ///ssss
-    //ddd
 }
