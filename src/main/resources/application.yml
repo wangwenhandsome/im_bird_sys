@@ -8,7 +8,7 @@ spring:
 
     type: com.alibaba.druid.pool.DruidDataSource
 
-    url: jdbc:mysql:///im_bird
+    url: jdbc:mysql://172.26.103.19:3306/im_bird
 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
