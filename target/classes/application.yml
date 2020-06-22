@@ -8,7 +8,7 @@ spring:
 
     type: com.alibaba.druid.pool.DruidDataSource
 
-    url: jdbc:mysql:///im_bird
+    url: jdbc:mysql://172.26.103.19:3306/im_bird
 
     driver-class-name: com.mysql.cj.jdbc.Driver
 
@@ -44,4 +44,4 @@ fdfs:
     width: 150
     height: 150
   tracker-list:            #TrackerList参数,支持多个
-    - 120.26.186.99:22122
+    - 172.26.103.19:22122
